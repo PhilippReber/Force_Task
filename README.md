@@ -24,5 +24,3 @@ ser = serial.Serial('your/usb/device')
 task = Force_Static_Task(n_trials=10, inlet=ser)
 task.run()
 ```
-
-This will create a new instance of the "Force_Static_Task" class and call its "run" method.
