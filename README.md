@@ -16,10 +16,12 @@ from Force_Task import Force_Move_Task
 
 Example:
 ```python
-from Force_Task import Force_Move_Task
+from Force_Task import Force_Static_Task
+import serial
 
-task = Force_Move_Task()
-task.start_task()
+ser = serial.Serial('your/usb/device')
+task = Force_Static_Task(n_trials=10, inlet=ser)
+task.run()
 ```
 
-This will create a new instance of the "Force_Move_Task" class and call its "start_task" method.
+This will create a new instance of the "Force_Static_Task" class and call its "run" method.
