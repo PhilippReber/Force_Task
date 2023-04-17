@@ -3,6 +3,7 @@
 ## Prerequisites
 - Python 3.x installed on your system.
 - The "Force_Task.py" file in the same directory as your Python script.
+- In my setup I use an Arduino board that streams the voltage signals of a load cell via USB to the experiment computer. Upload the "send_smooth_data.ino" code to the Arduino.
 
 ## Loading the Class
 1. Open your Python script in your code editor.
