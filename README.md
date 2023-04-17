@@ -12,7 +12,7 @@
 from Force_Task import Force_Static_Task
 ```
 
-3. You can now create an instance of the "Force_Move_Task" class and use its methods in your code.
+3. You can now create an instance of the "Force_Static_Task" class and use its methods in your code.
 
 Example:
 ```python
