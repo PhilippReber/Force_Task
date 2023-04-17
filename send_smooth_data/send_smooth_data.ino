@@ -2,7 +2,6 @@ int N_SAMPLES_TO_AVERAGE = 300;
 
 void setup() {
   Serial.begin(9600);
-
 }
 
 double val = 0;
@@ -16,5 +15,4 @@ void loop() {
 
   val /= N_SAMPLES_TO_AVERAGE;
   Serial.println(val);
-  
 }
