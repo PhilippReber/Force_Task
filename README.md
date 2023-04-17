@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - Python 3.x installed on your system.
-- The "Force_Task.py" class file in the same directory as your Python script.
+- The "Force_Task.py" file in the same directory as your Python script.
 
 ## Loading the Class
 1. Open your Python script in your code editor.
