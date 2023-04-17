@@ -322,7 +322,7 @@ def main():
     freqs = [0.4, 0.45, 0.48, 0.59, 0.67]  # movement speed in Hz (top to bottom)
     # demands = [0.05, 0.08, 0.1, 0.12, 0.15]  # of max force (original)
     demands = [0.092, 0.094, 0.096, 0.098, 0.100]  # of max force (adjusted)
-    task = Force_Move_Task(freqs=freqs, demands=demands, n_trials=10, inlet=ser, trigger='1')  
+    task = Force_Move_Task(freqs=freqs, demands=demands, n_trials=10, inlet=ser)  
     # task = Force_Static_Task(n_trials=10, inlet=ser, demand=0.1)  
     task.run()
 
