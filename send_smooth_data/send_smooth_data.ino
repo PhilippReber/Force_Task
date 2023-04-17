@@ -15,4 +15,5 @@ void loop() {
 
   val /= N_SAMPLES_TO_AVERAGE;
   Serial.println(val);
+  delay(1);
 }
