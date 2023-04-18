@@ -20,7 +20,8 @@ Example:
 from Force_Task import Force_Static_Task
 import serial
 
-ser = serial.Serial('your/usb/device')  # read stream from force sensor
-task = Force_Static_Task(n_trials=10, inlet=ser)
+ser_sensor = serial.Serial('your/sensor/device')  # read stream from force sensor
+ser_trigger = serial.Serial('your/trigger/device')  # write stream to EEG trigger box
+task = Force_Static_Task(n_trials=10, inlet=ser_sensor, outlet=ser_trigger)
 task.run()
 ```
