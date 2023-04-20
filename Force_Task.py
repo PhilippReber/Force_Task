@@ -12,6 +12,12 @@ class Force_Move_Task:
     def __init__(self, freqs, demands, n_trials, inlet, outlet, break_time=5, calibrate=True,
                  monitor='testMonitor', y_max=7, radius_target=0.8, radius_subject=0.5):
         """
+        EEG markers
+        -----------
+        1 : trial
+        2 : break
+        3 : calibration
+
         Parameters
         ----------
         freqs : array-like
@@ -40,8 +46,8 @@ class Force_Move_Task:
         self.radius_subject = radius_subject
         self.target = Circle(self.win, radius=radius_target, fillColor='yellow')
         self.subject = Circle(self.win, radius=radius_subject, fillColor='blue')
-        self.line_up = Line(self.win, start=(-4,y_max+radius_target), end=(4, y_max+radius_target), lineWidth=1)
-        self.line_low = Line(self.win, start=(-4,-y_max-radius_target), end=(4,-y_max-radius_target), lineWidth=1)
+        self.line_up = Line(self.win, start=(-4,y_max+radius_target), end=(4, y_max+radius_target), lineWidth=1, lineColor='white')
+        self.line_low = Line(self.win, start=(-4,-y_max-radius_target), end=(4,-y_max-radius_target), lineWidth=1, lineColor='white')
         self.msg = TextStim(self.win, text='', color=1, height=1, wrapWidth=20, pos=(-4.5,0), alignHoriz='right')
         self.msg_calibrate = TextStim(self.win, text='', color=1, height=1, wrapWidth=20, pos=(0,0), alignHoriz='center')
         self.frame_rate = int(1 / self.win.monitorFramePeriod)
@@ -98,9 +104,11 @@ class Force_Move_Task:
         self.msg_calibrate.draw()
         self.win.flip()
         event.waitKeys(keyList=['k'])
+        
         self.msg_calibrate.text = 'Apply maximal force...'
         self.msg_calibrate.draw()
         self.win.flip()
+        send_trigger(3, self.outlet)
         forces = []
         t0 = time.time()
         while time.time() - t0 < 10:
@@ -198,6 +206,7 @@ class Force_Move_Task:
             self.target.pos = 0, tar_y
             self.target.fillColor = 'yellow'
             self.subject.pos = 0, sub_y
+            send_trigger(2, self.outlet)
             for t in range(self.break_time):
                 self.msg.text = 'break %ss...' % (self.break_time - int(t))
                 self.msg.draw()
@@ -217,6 +226,12 @@ class Force_Static_Task:
     def __init__(self, n_trials, inlet, outlet, demand=0.1, break_time=5, calibrate=True,
                  monitor='testMonitor', y_max=7, radius_target=0.6, radius_subject=0.5):
         """
+        EEG-Markers (triggers)
+        ----------------------
+        1 : trial
+        2 : break
+        3 : calibration
+
         Parameters
         ----------
         n_trials : int
@@ -243,8 +258,8 @@ class Force_Static_Task:
         self.radius_subject = radius_subject
         self.target = Circle(self.win, radius=radius_target, fillColor='yellow')
         self.subject = Circle(self.win, radius=radius_subject, fillColor='blue')
-        self.line_up = Line(self.win, start=(-4,y_max+radius_target), end=(4, y_max+radius_target), lineWidth=1)
-        self.line_low = Line(self.win, start=(-4,-y_max-radius_target), end=(4,-y_max-radius_target), lineWidth=1)
+        self.line_up = Line(self.win, start=(-4,y_max+radius_target), end=(4, y_max+radius_target), lineWidth=1, lineColor='white')
+        self.line_low = Line(self.win, start=(-4,-y_max-radius_target), end=(4,-y_max-radius_target), lineWidth=1, lineColor='white')
         self.msg = TextStim(self.win, text='', color=1, height=1, wrapWidth=20, pos=(-4.5,0), alignHoriz='right')
         self.msg_calibrate = TextStim(self.win, text='', color=1, height=1, wrapWidth=20, pos=(0,0))
         self.frame_rate = int(1 / self.win.monitorFramePeriod)
@@ -295,6 +310,7 @@ class Force_Static_Task:
         self.msg_calibrate.text = 'Apply maximal force...'
         self.msg_calibrate.draw()
         self.win.flip()
+        send_trigger(3, self.outlet)
         forces = []
         t0 = time.time()
         while time.time() - t0 < 10:
@@ -375,6 +391,7 @@ class Force_Static_Task:
             self.target.pos = 0, tar_y
             self.target.fillColor = 'yellow'
             self.subject.pos = 0, sub_y
+            send_trigger(2, self.outlet)
             for t in range(self.break_time):
                 self.msg.text = 'break %is...' % (self.break_time - int(t))
                 self.msg.draw()
